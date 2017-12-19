@@ -1,0 +1,33 @@
+type bookList {
+  id: ID
+  title: String
+  author: String
+}
+
+type Mutation {
+  ordersmutation(input: OrdersMutationInput!): OrdersMutationPayload
+}
+
+input Orders {
+  book_id: ID
+  quantity: Int
+}
+
+input OrdersMutationInput {
+  values: Orders
+  keyIndex: Int
+  clientMutationId: String
+}
+
+type OrdersMutationPayload {
+  ordersOutput: String
+  clientMutationId: String
+}
+
+type Query {
+  store: Store
+}
+
+type Store {
+  books: [bookList]
+}
