@@ -9,7 +9,7 @@ type Mutation {
 }
 
 input Orders {
-  book_id: ID
+  book_id: Int
   quantity: Int
 }
 

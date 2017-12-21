@@ -1,4 +1,4 @@
-import Relay from 'react-relay';
+import Relay from 'react-relay/classic';
 
 export default class create extends Relay.Mutation {
 
@@ -36,7 +36,15 @@ export default class create extends Relay.Mutation {
 
  //Finally, the getConfigs method tells Relay how to deal with the response data.
   getConfigs() {
+    return [{
+      type: 'RANGE_ADD',
+    connectionName : 'ordersOutput',
+    edgeName: 'ordersOutput',
+    rangeBehaviors: {
+      '': 'append'
+    },
 
+}]
   }
 
   getOptimisticResponse() {

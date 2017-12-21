@@ -64,7 +64,7 @@ let storeType = new GraphQLObjectType({
     name: 'Orders',
     fields: () => ({
      book_id: {
-          type: GraphQLID
+          type: GraphQLInt
         },
       quantity: {
          type: GraphQLInt
@@ -72,7 +72,7 @@ let storeType = new GraphQLObjectType({
     })
   });
 
-  const ordersMutationType = mutationWithClientMutationId({
+ const ordersMutationType = mutationWithClientMutationId({
     name: 'OrdersMutation',
     inputFields : {
       values : {
@@ -86,34 +86,50 @@ let storeType = new GraphQLObjectType({
       ordersOutput : {
         type : GraphQLString,
         resolve : (payload) => {
-            return ""
+            return "hello"
         }
       }
 
     },
     mutateAndGetPayload : ({values,keyIndex}) =>{
 
+      console.log("aaa");
+      var query = "INSERT INTO Orders (book_id,quantity,cart) VALUES (";
+      values.cart = "added";
+      let valuesLength = Object.keys(values).length;
 
-      var query = "INSERT INTO Orders (";
-      console.log(values);
-      //
-      // pool.query(query,function(error,results,fields){
-      //   console.log(error);
-      //   console.log(results);
-      // });
+       for(var j in values){
+
+               query = query + "'"+values[j]+"'";
+                valuesLength--;
+               if(valuesLength>0){
+                 query = query + ",";
+               }
+     }
+
+      query += ")"
+
+      console.log(query);
+
+
+      pool.query(query,function(error,results,fields){
+        console.log(error);
+        console.log(results);
+      });
 
     }
 
   });
 
-//   var queryType = new GraphQLObjectType({
-//   name: 'Query',
-//   fields: () => ({
-//     node: nodeField,
-//     // Add your own root fields here
-//
-//   }),
-// });
+  var queryType = new GraphQLObjectType({
+  name: 'Query',
+  fields: () => ({
+    store: {
+      type: storeType,
+      resolve: () => empty
+      }
+    })
+});
 
   var mutationType = new GraphQLObjectType({
     name: 'Mutation',
@@ -123,16 +139,8 @@ let storeType = new GraphQLObjectType({
   });
 
 
-  let schema = new GraphQLSchema({
-    query: new GraphQLObjectType({
-      name: 'Query',
-      fields: () => ({
-        store: {
-          type: storeType,
-          resolve: () => empty
-          }
-        })
-      }),
+ const schema = new GraphQLSchema({
+    query: queryType,
     mutation: mutationType
   })
 

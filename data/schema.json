@@ -216,7 +216,7 @@
               "description": null,
               "type": {
                 "kind": "SCALAR",
-                "name": "ID",
+                "name": "Int",
                 "ofType": null
               },
               "defaultValue": null
