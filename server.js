@@ -6,7 +6,7 @@ import webpackConfig from './webpack.config';
 import graphQLHTTP from 'express-graphql';
 import {clean} from 'require-clean';
 import {exec} from 'child_process';
-import schema from './data/schema';
+import Schema from './data/schema';
 import chokidar from 'chokidar';
 
 const APP_PORT = 3000;
@@ -45,7 +45,7 @@ clean('./data/schema');
   graphQLApp.use('/', graphQLHTTP({
     graphiql: true,
     pretty: true,
-    schema: schema,
+    schema: Schema,
   }));
   graphQLServer = graphQLApp.listen(GRAPHQL_PORT, () => {
     console.log(
