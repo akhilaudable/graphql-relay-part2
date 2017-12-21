@@ -139,11 +139,11 @@ let storeType = new GraphQLObjectType({
   });
 
 
- const schema = new GraphQLSchema({
+ const Schema = new GraphQLSchema({
     query: queryType,
     mutation: mutationType
   })
 
    //mutation:
 
-export default schema;
+export default Schema;
