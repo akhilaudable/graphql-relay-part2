@@ -1,6 +1,6 @@
 # graphql-relay-part2
 
-This is the continuation of [GraphQL-Relay-part1](https://github.com/akhilaudable/graphql-relay-part1). A GraphQL server implementing a tiny example schema, and a transpiler that you can use to get started building an app with Relay which is built for both query and mutation. 
+This is the continuation of [GraphQL-Relay-part1](https://github.com/akhilaudable/graphql-relay-part1). A GraphQL server implementing a tiny example schema, and a transpiler that you can use to get started building an app with Relay which is ***built for both query and mutation.*** 
 
 #### Please import the file Bookstore.sql. 
 ``` $ mysql -u root -p Bookstore < path / to / graphql_relay_starter / Bookstore.sql```
